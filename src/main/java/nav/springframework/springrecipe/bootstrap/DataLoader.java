@@ -1,5 +1,6 @@
 package nav.springframework.springrecipe.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import nav.springframework.springrecipe.model.*;
 import nav.springframework.springrecipe.repositories.RecipeRepository;
 import nav.springframework.springrecipe.repositories.UnitOfMeasureRepository;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -23,6 +25,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        log.debug("Initiating Loading of Data");
         Recipe spicyGrilledChickenTacos = new Recipe();
         spicyGrilledChickenTacos.setDescription("Spicy Grilled Chicken Tacos");
         spicyGrilledChickenTacos.setPrepTime(20);
@@ -67,6 +70,7 @@ public class DataLoader implements CommandLineRunner {
         spicyGrilledChickenTacos.setNotes(notes1);
 
         recipeRepository.save(spicyGrilledChickenTacos);
+        log.debug("Saved Spicy Grilled Chicken Taco Recipe");
 
         Recipe bestGuacamole = new Recipe();
         bestGuacamole.setDescription("The Best Guacamole");
@@ -115,6 +119,8 @@ public class DataLoader implements CommandLineRunner {
         bestGuacamole.setNotes(notes2);
 
         recipeRepository.save(bestGuacamole);
+        log.debug("Saved Guacamole Recipe");
+        log.debug("Completed Data Loading");
     }
 
     private BigDecimal bd(int val) {
@@ -129,6 +135,7 @@ public class DataLoader implements CommandLineRunner {
         Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription(description);
         if (unitOfMeasureOptional.isEmpty()) throw new RuntimeException("Unit of Measure \"" +
                 description + "\" Not Found!");
+        log.debug("Successfully Retrieved Unit of Measurement " + description);
         return unitOfMeasureOptional.get();
     }
 }
