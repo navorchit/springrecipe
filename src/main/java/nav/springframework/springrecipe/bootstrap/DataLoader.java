@@ -49,35 +49,21 @@ public class DataLoader implements CommandLineRunner {
                 "Slice the chicken into strips. On each tortilla, place a small handful of arugula. Top with chicken slices, sliced avocado, radishes, tomatoes, and onion slices. Drizzle with the thinned sour cream. Serve with lime wedges.");
         spicyGrilledChickenTacos.setDifficulty(Difficulty.MODERATE);
 
-        Ingredient anchoChilliPowder = new Ingredient("Ancho Chilli Powder",
-                bd(2), uom("Tablespoon"), spicyGrilledChickenTacos);
-        Ingredient driedOregano = new Ingredient("Dried Oregano",
-                bd(1),uom("Teaspoon"), spicyGrilledChickenTacos);
-        Ingredient driedCumin = new Ingredient("Dried Cumin",
-                bd(1), uom("Teaspoon"), spicyGrilledChickenTacos);
-        Ingredient sugar = new Ingredient("Sugar",
-                bd(1), uom("Teaspoon"), spicyGrilledChickenTacos);
-        Ingredient salt = new Ingredient("Salt",
-                bd(0.5), uom("Teaspoon"), spicyGrilledChickenTacos);
-        Ingredient garlic = new Ingredient("Clove Finely Chopped Garlic",
-                bd(1), null, spicyGrilledChickenTacos);
-        Ingredient orangeZest = new Ingredient("Finely Grated Orange Zest",
-                bd(1), uom("Tablespoon"), spicyGrilledChickenTacos);
-        Ingredient orangeJuice = new Ingredient("Fresh-Squeezed Orange Juice",
-                bd(3), uom("Tablespoon"), spicyGrilledChickenTacos);
-        Ingredient oliveOil = new Ingredient("Olive Oil",
-                bd(2), uom("Tablespoon"), spicyGrilledChickenTacos);
-        Ingredient chickenThighs = new Ingredient("Skinless, Boneless Chicken Thighs",
-                bd(6), null, spicyGrilledChickenTacos);
-
-        spicyGrilledChickenTacos.getIngredients().addAll(List.of(new Ingredient[]{
-                anchoChilliPowder, driedOregano, driedCumin, sugar, salt, garlic, orangeZest, orangeJuice,
-                oliveOil, chickenThighs
+        spicyGrilledChickenTacos.addAllIngredients(List.of(new Ingredient[]{
+                new Ingredient("Ancho Chilli Powder", bd(2), uom("Tablespoon")),
+                new Ingredient("Dried Oregano", bd(1),uom("Teaspoon")),
+                new Ingredient("Dried Cumin", bd(1), uom("Teaspoon")),
+                new Ingredient("Sugar", bd(1), uom("Teaspoon")),
+                new Ingredient("Salt", bd(0.5), uom("Teaspoon")),
+                new Ingredient("Clove Finely Chopped Garlic", bd(1), null),
+                new Ingredient("Finely Grated Orange Zest", bd(1), uom("Tablespoon")),
+                new Ingredient("Fresh-Squeezed Orange Juice", bd(3), uom("Tablespoon")),
+                new Ingredient("Olive Oil", bd(2), uom("Tablespoon")),
+                new Ingredient("Skinless, Boneless Chicken Thighs", bd(6), null)
         }));
 
         Notes notes1 = new Notes();
         notes1.setRecipeNotes("Look for ancho chile powder with the Mexican ingredients at your grocery store, on buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
-        notes1.setRecipe(spicyGrilledChickenTacos);
         spicyGrilledChickenTacos.setNotes(notes1);
 
         recipeRepository.save(spicyGrilledChickenTacos);
@@ -112,32 +98,20 @@ public class DataLoader implements CommandLineRunner {
                 "Refrigerate leftover guacamole up to 3 days.");
         bestGuacamole.setDifficulty(Difficulty.EASY);
 
-        Ingredient avocado = new Ingredient("Ripe Avocados",
-                bd(2), null, bestGuacamole);
-        Ingredient kosherSalt = new Ingredient("Kosher Salt",
-                bd(0.25), uom("Teaspoon"), bestGuacamole);
-        Ingredient lemonJuice = new Ingredient("Fresh Lime or Lemon Juice",
-                bd(1), uom("Tablespoon"), bestGuacamole);
-        Ingredient onion = new Ingredient("Minced Red Onion or Thinly Sliced Green Onion",
-                bd(4), uom("Tablespoon"), bestGuacamole);
-        Ingredient chili = new Ingredient("Serrano (or Jalapeño) Chilis, stems and seeds removed, minced",
-                bd(2), null, bestGuacamole);
-        Ingredient cilantro = new Ingredient("Cilantro (Leaves and Tender Stems), Finely Chopped",
-                bd(2), uom("Tablespoon"), bestGuacamole);
-        Ingredient blackPepper = new Ingredient("Freshly Grounded Black Pepper",
-                bd(1), uom("Pinch"), bestGuacamole);
-        Ingredient tomato = new Ingredient("Ripe Tomato, Chopped (Optional)",
-                bd(0.5), null, bestGuacamole);
-        Ingredient radish = new Ingredient("Red radish or Jicama Slices for Garnish (Optional)",
-                null, null, bestGuacamole);
-
-        bestGuacamole.getIngredients().addAll(List.of(new Ingredient[]{
-            avocado, kosherSalt, lemonJuice, onion, chili, cilantro, blackPepper, tomato, radish
+        bestGuacamole.addAllIngredients(List.of(new Ingredient[]{
+                new Ingredient("Ripe Avocados", bd(2), null),
+                new Ingredient("Kosher Salt", bd(0.25), uom("Teaspoon")),
+                new Ingredient("Fresh Lime or Lemon Juice", bd(1), uom("Tablespoon")),
+                new Ingredient("Minced Red Onion or Thinly Sliced Green Onion", bd(4), uom("Tablespoon")),
+                new Ingredient("Serrano (or Jalapeño) Chilis, stems and seeds removed, minced", bd(2), null),
+                new Ingredient("Cilantro (Leaves and Tender Stems), Finely Chopped", bd(2), uom("Tablespoon")),
+                new Ingredient("Freshly Grounded Black Pepper", bd(1), uom("Pinch")),
+                new Ingredient("Ripe Tomato, Chopped (Optional)", bd(0.5), null),
+                new Ingredient("Red radish or Jicama Slices for Garnish (Optional)",null, null)
         }));
 
         Notes notes2 = new Notes();
         notes2.setRecipeNotes("Be careful handling chilis! If using, it's best to wear food-safe gloves. If no gloves are available, wash your hands thoroughly after handling, and do not touch your eyes or the area near your eyes for several hours afterwards.");
-        notes2.setRecipe(bestGuacamole);
         bestGuacamole.setNotes(notes2);
 
         recipeRepository.save(bestGuacamole);

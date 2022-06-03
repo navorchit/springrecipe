@@ -1,6 +1,7 @@
 package nav.springframework.springrecipe.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -106,6 +107,15 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public void addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+    }
+
+    public void addAllIngredients(Collection<? extends Ingredient> c) {
+        c.stream().iterator().forEachRemaining(this::addIngredient);
+    }
+
     public Byte[] getImage() {
         return image;
     }
@@ -128,6 +138,7 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
     }
 
     public Set<Category> getCategories() {
