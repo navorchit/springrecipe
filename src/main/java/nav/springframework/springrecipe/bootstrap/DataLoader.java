@@ -58,11 +58,11 @@ public class DataLoader implements CommandLineRunner {
                 new Ingredient("Dried Cumin", bd(1), uom("Teaspoon")),
                 new Ingredient("Sugar", bd(1), uom("Teaspoon")),
                 new Ingredient("Salt", bd(0.5), uom("Teaspoon")),
-                new Ingredient("Clove Finely Chopped Garlic", bd(1), null),
+                new Ingredient("Clove Finely Chopped Garlic", bd(1), uom("")),
                 new Ingredient("Finely Grated Orange Zest", bd(1), uom("Tablespoon")),
                 new Ingredient("Fresh-Squeezed Orange Juice", bd(3), uom("Tablespoon")),
                 new Ingredient("Olive Oil", bd(2), uom("Tablespoon")),
-                new Ingredient("Skinless, Boneless Chicken Thighs", bd(6), null)
+                new Ingredient("Skinless, Boneless Chicken Thighs", bd(6), uom(""))
         }));
 
         Notes notes1 = new Notes();
@@ -103,15 +103,15 @@ public class DataLoader implements CommandLineRunner {
         bestGuacamole.setDifficulty(Difficulty.EASY);
 
         bestGuacamole.addAllIngredients(List.of(new Ingredient[]{
-                new Ingredient("Ripe Avocados", bd(2), null),
+                new Ingredient("Ripe Avocados", bd(2), uom("")),
                 new Ingredient("Kosher Salt", bd(0.25), uom("Teaspoon")),
                 new Ingredient("Fresh Lime or Lemon Juice", bd(1), uom("Tablespoon")),
                 new Ingredient("Minced Red Onion or Thinly Sliced Green Onion", bd(4), uom("Tablespoon")),
-                new Ingredient("Serrano (or Jalapeño) Chilis, stems and seeds removed, minced", bd(2), null),
+                new Ingredient("Serrano (or Jalapeño) Chilis, stems and seeds removed, minced", bd(2), uom("")),
                 new Ingredient("Cilantro (Leaves and Tender Stems), Finely Chopped", bd(2), uom("Tablespoon")),
                 new Ingredient("Freshly Grounded Black Pepper", bd(1), uom("Pinch")),
-                new Ingredient("Ripe Tomato, Chopped (Optional)", bd(0.5), null),
-                new Ingredient("Red radish or Jicama Slices for Garnish (Optional)",null, null)
+                new Ingredient("Ripe Tomato, Chopped (Optional)", bd(0.5), uom("")),
+                new Ingredient("Red radish or Jicama Slices for Garnish (Optional)",bd(0), uom(""))
         }));
 
         Notes notes2 = new Notes();
