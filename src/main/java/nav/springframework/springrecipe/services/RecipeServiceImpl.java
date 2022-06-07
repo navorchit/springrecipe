@@ -7,6 +7,7 @@ import nav.springframework.springrecipe.converters.RecipeToRecipeCommand;
 import nav.springframework.springrecipe.model.Recipe;
 import nav.springframework.springrecipe.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -38,6 +39,12 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findById(Long id) {
         log.debug("Retrieving Recipe with ID " + id);
         return recipeRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 
     @Override
