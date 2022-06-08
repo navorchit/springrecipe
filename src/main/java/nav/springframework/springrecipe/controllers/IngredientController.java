@@ -1,6 +1,8 @@
 package nav.springframework.springrecipe.controllers;
 
 import nav.springframework.springrecipe.commands.IngredientCommand;
+import nav.springframework.springrecipe.commands.RecipeCommand;
+import nav.springframework.springrecipe.commands.UnitOfMeasureCommand;
 import nav.springframework.springrecipe.services.IngredientService;
 import nav.springframework.springrecipe.services.RecipeService;
 import nav.springframework.springrecipe.services.UnitOfMeasureService;
@@ -34,6 +36,23 @@ public class IngredientController {
                                        @PathVariable Long id, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id));
         return "recipe/ingredients/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable Long recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findCommandById(recipeId);
+        // todo exception handling
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeId);
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("unitOfMeasureList", unitOfMeasureService.listAllUnitsOfMeasure());
+
+        return "recipe/ingredients/ingredientform";
     }
 
     @GetMapping
