@@ -93,4 +93,19 @@ public class IngredientServiceImpl implements IngredientService {
         // todo check for fail
         return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
     }
+
+    @Override
+    public void deleteByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) return;
+        Recipe recipe = recipeOptional.get();
+        recipe.getIngredients().removeIf(ingredient -> {
+            if (ingredient.getId().equals(ingredientId)) {
+                ingredient.setRecipe(null);
+                return true;
+            } else return false;
+        });
+        recipeRepository.save(recipe);
+    }
 }
