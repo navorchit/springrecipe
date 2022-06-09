@@ -1,6 +1,7 @@
 package nav.springframework.springrecipe.controllers;
 
 import nav.springframework.springrecipe.commands.RecipeCommand;
+import nav.springframework.springrecipe.exceptions.NotFoundException;
 import nav.springframework.springrecipe.model.Recipe;
 import nav.springframework.springrecipe.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,6 +56,14 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    void getRecipeNotFound() throws Exception {
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
     @Test

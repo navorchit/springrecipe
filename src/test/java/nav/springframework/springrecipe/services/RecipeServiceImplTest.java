@@ -1,5 +1,6 @@
 package nav.springframework.springrecipe.services;
 
+import nav.springframework.springrecipe.exceptions.NotFoundException;
 import nav.springframework.springrecipe.model.Recipe;
 import nav.springframework.springrecipe.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,5 +61,15 @@ class RecipeServiceImplTest {
         recipeService.deleteById(idToDelete);
 
         verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    void getRecipeByIdNotFound() {
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        assertThrows(NotFoundException.class,
+                () -> recipeService.findById(1L));
     }
 }
