@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -39,7 +40,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe findById(Long id) {
         log.debug("Retrieving Recipe with ID " + id);
-        return recipeRepository.findById(id).orElseThrow(NotFoundException::new);
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if (recipeOptional.isEmpty()) throw new NotFoundException("Recipe with ID " + id + " Not Found.");
+        return recipeOptional.get();
     }
 
     @Override
