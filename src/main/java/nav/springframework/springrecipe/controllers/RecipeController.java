@@ -1,13 +1,13 @@
 package nav.springframework.springrecipe.controllers;
 
 import nav.springframework.springrecipe.commands.RecipeCommand;
-import nav.springframework.springrecipe.exceptions.NotFoundException;
 import nav.springframework.springrecipe.services.RecipeService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class RecipeController {
@@ -41,7 +41,9 @@ public class RecipeController {
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "recipe/recipeform";
+
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
