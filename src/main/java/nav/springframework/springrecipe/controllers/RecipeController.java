@@ -52,18 +52,4 @@ public class RecipeController {
         recipeService.deleteById(id);
         return "redirect:/";
     }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public String handleNotFound(Exception e, Model model) {
-        model.addAttribute("exception", e);
-        return "404error";
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
-    public String badRequest(Exception e, Model model) {
-        model.addAttribute("exception", e);
-        return "400error";
-    }
 }
